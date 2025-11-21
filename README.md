@@ -52,7 +52,7 @@ pnpm install
 
 1. **Configure Environment Variables**
 
-Create a `.env` file in `gateway-app/`:
+Create a `.env` file based on `.env.example`:
 
 **For Development Mode (HTTP, no SSL):**
 ```bash
@@ -80,13 +80,13 @@ VITE_GATEWAY_API_KEY=your-api-key-here
 
 **Development mode** (HTTP, no SSL, no API key):
 ```bash
-cd /Users/feng/gateway
+cd /path/to/gateway-server
 pnpm start --passphrase=<PASSPHRASE> --dev
 ```
 
 **Production mode** (HTTPS, requires API key):
 ```bash
-cd /Users/feng/gateway
+cd /path/to/gateway-server
 GATEWAY_API_KEYS=your-api-key-here pnpm start --passphrase=<PASSPHRASE>
 ```
 
@@ -96,7 +96,7 @@ GATEWAY_API_KEYS=your-api-key-here pnpm start --passphrase=<PASSPHRASE>
 
 Start the web dev server:
 ```bash
-cd /Users/feng/gateway/gateway-app
+cd /path/to/gateway-app
 pnpm dev
 ```
 
@@ -106,7 +106,7 @@ The app will be available at http://localhost:1420
 
 Start the Tauri dev build:
 ```bash
-cd /Users/feng/gateway/gateway-app
+cd /path/to/gateway-app
 pnpm tauri dev
 ```
 
@@ -165,7 +165,7 @@ The app supports two authentication modes depending on how Gateway is running:
 
 Build the native macOS desktop application:
 ```bash
-cd /Users/feng/gateway/gateway-app
+cd /path/to/gateway-app
 pnpm tauri build
 ```
 
@@ -191,7 +191,7 @@ This will:
 
 Build and install Android APK:
 ```bash
-cd /Users/feng/gateway/gateway-app
+cd /path/to/gateway-app
 ./build-android-dev.sh
 ```
 
@@ -212,7 +212,7 @@ adb install src-tauri/gen/android/app/build/outputs/apk/universal/debug/app-univ
 
 Build the frontend without Tauri:
 ```bash
-cd /Users/feng/gateway/gateway-app
+cd /path/to/gateway-app
 pnpm build
 ```
 
