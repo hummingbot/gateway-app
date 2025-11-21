@@ -23,8 +23,28 @@ A lightweight desktop application for interacting with the Gateway API server, b
 
 ## Prerequisites
 
+- Node.js 18+ installed
 - Gateway server must be running
-- Node.js 18+ and pnpm installed
+
+## Installation
+
+1. **Install pnpm** (if not already installed):
+
+```bash
+npm install -g pnpm
+```
+
+Or using Homebrew on macOS:
+```bash
+brew install pnpm
+```
+
+2. **Install dependencies**:
+
+```bash
+cd /Users/feng/gateway-app
+pnpm install
+```
 
 ## Development
 
@@ -118,28 +138,6 @@ If the Tauri desktop app shows outdated settings (e.g., only darkMode without th
 
 This syncs your project's `app-config.json` to the Tauri app's config storage location.
 
-**Editing theme colors:**
-
-Edit `app-config.json` in the project root:
-```json
-{
-  "darkMode": true,
-  "theme": {
-    "colors": {
-      "primary": "#0f172a",
-      "primaryDark": "#f8fafc",
-      "accent": "#f1f5f9",
-      "accentDark": "#1e293b"
-    }
-  }
-}
-```
-
-- Supports hex color codes (e.g., `#0f172a`)
-- See `THEMES.json` for 10+ pre-made color schemes to copy from
-- In browser mode: Clear localStorage and refresh to see changes
-- In Tauri mode: Changes apply immediately when saved via Config UI
-
 ### Authentication
 
 The app supports two authentication modes depending on how Gateway is running:
@@ -226,75 +224,9 @@ Output: `dist/` directory with HTML/CSS/JS
 
 - **KISS Principle**: No complex state management libraries - simple React state and context
 - **Typed API Client**: Organized namespace-based API client with full TypeScript support
-- **Reusable Components**: Modular UI components (BaseModal, FormField, LoadingState, etc.)
-- **Type Safety**: TypeScript with path aliases to import Gateway backend schemas
+- **Reusable Components**: Modular UI components from shadcn/ui
+- **Type Safety**: TypeScript with path aliases
 - **React Context**: Global state for wallet/network selection only
-
-### Project Structure
-
-```
-gateway-app/
-├── src/
-│   ├── components/         # Feature components
-│   │   ├── App.tsx        # Main app with routing
-│   │   ├── PortfolioView.tsx
-│   │   ├── SwapView.tsx
-│   │   ├── PoolsView.tsx
-│   │   ├── LiquidityView.tsx
-│   │   └── ConfigView.tsx
-│   ├── components/ui/      # Reusable UI components
-│   │   ├── BaseModal.tsx
-│   │   ├── EmptyState.tsx
-│   │   ├── LoadingState.tsx
-│   │   ├── FormField.tsx
-│   │   ├── ActionButtons.tsx
-│   │   └── button.tsx
-│   ├── lib/
-│   │   ├── GatewayAPI.ts  # Typed API client (ConfigAPI, ChainAPI, etc.)
-│   │   ├── api.ts         # Base HTTP client
-│   │   └── utils.ts       # Utility functions
-│   └── styles/
-│       └── index.css      # Global styles
-├── API.md                 # API client documentation
-├── COMPONENTS.md          # Component library documentation
-└── README.md             # This file
-```
-
-### API Client
-
-The app uses a typed API client (`GatewayAPI.ts`) that organizes endpoints into logical namespaces:
-
-```typescript
-import { gatewayAPI } from '@/lib/GatewayAPI';
-
-// Get chain balances
-const balances = await gatewayAPI.chains.getBalances('solana', {
-  network: 'mainnet-beta',
-  address: walletAddress
-});
-
-// Get swap quote
-const quote = await gatewayAPI.router.quoteSwap('jupiter', {
-  network: 'mainnet-beta',
-  baseToken: 'SOL',
-  quoteToken: 'USDC',
-  amount: 1.0,
-  side: 'SELL'
-});
-```
-
-See [API.md](./API.md) for complete API documentation.
-
-### Component Library
-
-Reusable UI components for consistent design:
-
-- **BaseModal**: Modal dialogs with consistent styling
-- **FormField**: Form inputs with labels
-- **LoadingState/EmptyState**: Loading and empty data states
-- **ActionButtons**: Button layouts for forms
-
-See [COMPONENTS.md](./COMPONENTS.md) for component documentation.
 
 ## Deployment Options
 
@@ -351,18 +283,3 @@ Build and install Android APK for mobile testing:
 **Use case**: Mobile testing, being optimized
 
 **Note**: Requires Android SDK/NDK and Gateway with ngrok tunnel.
-
-## Configuration Sharing
-
-The app reuses the same `/conf` folder as the Gateway server:
-- `conf/wallets/` - Encrypted wallet keys
-- `conf/chains/` - Network configurations
-- `conf/connectors/` - DEX connector settings
-- `conf/tokens/` - Token lists
-- `conf/rpc/` - RPC provider credentials
-
-## Documentation
-
-- **[API.md](./API.md)** - API client usage and examples
-- **[COMPONENTS.md](./COMPONENTS.md)** - Component library reference
-- **[DOCKER.md](../DOCKER.md)** - Docker deployment guide (root directory)
