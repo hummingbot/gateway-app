@@ -42,7 +42,7 @@ brew install pnpm
 2. **Install dependencies**:
 
 ```bash
-cd /Users/feng/gateway-app
+cd /path/to/gateway-app
 pnpm install
 ```
 
