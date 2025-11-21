@@ -2,8 +2,8 @@
 
 A lightweight MacOS desktop application for interacting with the Gateway API server, built with Tauri v2, React, TypeScript, and TailwindCSS.
 
-**Primary Platform**: macOS Desktop
-**Mobile Support**: Android builds available via `build-android-dev.sh` (experimental, being optimized)
+- **Primary Platform**: macOS
+- **Mobile Support**: Android builds available via `build-android-dev.sh` (experimental, being optimized)
 
 ## Features
 
